@@ -13,11 +13,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import DrawerButton from "./DrawerButton";
 import HistoryIcon from "@mui/icons-material/History";
-import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -43,7 +40,13 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
     }),
   })
 );
-
+function BilibiliIcon() {
+  return (
+    <SvgIcon>
+      <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z" />
+    </SvgIcon>
+  );
+}
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -60,13 +63,6 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-function BilibiliIcon() {
-  return (
-    <SvgIcon>
-      <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373Z" />
-    </SvgIcon>
-  );
-}
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -76,7 +72,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [currentPageName, setCurrentPageName] = React.useState("Home");
@@ -87,7 +83,17 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  const upperButtonChart = [
+    { name: "Home", html: <HomeIcon /> },
+    { name: "Bilibili", html: <BilibiliIcon /> },
+    { name: "Youtube", html: <YouTubeIcon /> },
+    { name: "Convert", html: <VideoLibraryIcon /> },
+  ];
+  const lowerButtonChart = [
+    { name: "Account", html: <AccountCircleIcon /> },
+    { name: "Contact", html: <MailIcon /> },
+    { name: "History", html: <HistoryIcon /> },
+  ];
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -131,60 +137,32 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Youtube", "Bilibili", "Convert"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  setCurrentPageName(text);
-                }}
-              >
-                <ListItemIcon>
-                  {(() => {
-                    if (index === 0) {
-                      return <HomeIcon />;
-                    } else if (index === 1) {
-                      return <YouTubeIcon />;
-                    } else if (index === 2) {
-                      return <BilibiliIcon />;
-                    } else if (index === 3) {
-                      return <VideoLibraryIcon />;
-                    }
-                  })()}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {upperButtonChart.map(function (object) {
+            return (
+              <DrawerButton
+                text={object.name}
+                setCurrentPageName={setCurrentPageName}
+                html={object.html}
+              />
+            );
+          })}
         </List>
         <Divider />
         <List>
-          {["Account", "History", "Contact Us"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  setCurrentPageName(text);
-                }}
-              >
-                <ListItemIcon>
-                  {(() => {
-                    if (index === 0) {
-                      return <AccountCircleIcon />;
-                    } else if (index === 1) {
-                      return <HistoryIcon />;
-                    } else if (index === 2) {
-                      return <MailIcon />;
-                    }
-                  })()}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {lowerButtonChart.map(function (object) {
+            return (
+              <DrawerButton
+                text={object.name}
+                setCurrentPageName={setCurrentPageName}
+                html={object.html}
+              />
+            );
+          })}
         </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Button variant="text">Text</Button>
+        {props.children}
       </Main>
     </Box>
   );
