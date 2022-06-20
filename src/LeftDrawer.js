@@ -137,9 +137,10 @@ export default function PersistentDrawerLeft(props) {
         </DrawerHeader>
         <Divider />
         <List>
-          {upperButtonChart.map(function (object) {
+          {upperButtonChart.map(function (object, index) {
             return (
               <DrawerButton
+                key={index}
                 text={object.name}
                 setCurrentPageName={setCurrentPageName}
                 html={object.html}
@@ -149,9 +150,10 @@ export default function PersistentDrawerLeft(props) {
         </List>
         <Divider />
         <List>
-          {lowerButtonChart.map(function (object) {
+          {lowerButtonChart.map(function (object, index) {
             return (
               <DrawerButton
+                key={index}
                 text={object.name}
                 setCurrentPageName={setCurrentPageName}
                 html={object.html}

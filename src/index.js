@@ -19,12 +19,12 @@ root.render(
       <LeftDrawer>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/youtube" element={<Youtube />} />
-          <Route exact path="/bilibili" element={<Bilibili />} />
-          <Route exact path="/account" element={<Account />} />
-          <Route exact path="/history" element={<History />} />
-          <Route exact path="/convert" element={<Convert />} />
-          <Route exact path="/contact" element={<Contact />} />
+          <Route path="/youtube" element={<Youtube />} />
+          <Route path="/bilibili" element={<Bilibili />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/convert" element={<Convert />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </LeftDrawer>
     </Router>
