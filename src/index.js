@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import LeftDrawer from "./LeftDrawer";
 import Home from "./content/Home";
 import Youtube from "./content/Youtube";
@@ -10,13 +9,14 @@ import Contact from "./content/Contact";
 import History from "./content/History";
 import Account from "./content/Account";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import Style from "./Style.js";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
+    <Style />
     <Router>
-      <LeftDrawer>
+      <LeftDrawer className="test">
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/youtube" element={<Youtube />} />

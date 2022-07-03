@@ -5,8 +5,8 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
 export default function SearchYoutube() {
-  const key = "AIzaSyD8B2eObk4CV1ZSd7IA3CBZa-zyrwvLqFc";
-  const resultNum = 20;
+  const key = process.env.REACT_APP_GOOGLE_API;
+  const resultNum = 5;
   const [searchValue, setSearchValue] = React.useState("");
   async function getSearchResult(searchInput) {
     try {
@@ -26,15 +26,28 @@ export default function SearchYoutube() {
   const searchHandle = () => {
     getSearchResult(searchValue);
   };
+  const handleReturn = (e) => {
+    //it triggers by pressing the enter key
+    if (e.key === "Enter") {
+      searchHandle();
+    }
+  };
   return (
-    <Box sx={{ bgcolor: "info.light" }}>
+    <Box
+      sx={{ bgcolor: "info.light", mt: 2 }}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      onKeyPress={handleReturn}
+    >
       <InputBase
+        className="test"
         sx={{ ml: 1, flex: 1 }}
         value={searchValue}
         onChange={handleChange}
         placeholder="Search Youtube Videos"
       />
-      <IconButton type="submit" sx={{ p: "10px" }} onClick={searchHandle}>
+      <IconButton sx={{ p: "10px" }} onClick={searchHandle}>
         <SearchIcon />
       </IconButton>
     </Box>
