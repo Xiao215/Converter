@@ -73,8 +73,8 @@ export default function SearchYoutube() {
         </IconButton>
       </Box>
       <Box component="span" sx={{ display: "block" }}>
-        {listVideos.map((video) => (
-          <Card sx={{ maxWidth: 345, display: "inline" }}>
+        {listVideos.map((video, index) => (
+          <Card sx={{ maxWidth: 345, display: "inline" }} key={index}>
             <CardActionArea>
               <CardMedia
                 component="img"
