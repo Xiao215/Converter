@@ -8,6 +8,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+
 import { CardActionArea } from "@mui/material";
 export default function SearchYoutube() {
   const key = process.env.REACT_APP_GOOGLE_API;
@@ -27,15 +29,14 @@ export default function SearchYoutube() {
         "Test Log -> file: SearchYoutube.js -> line 27 -> getSearchResult -> data",
         data
       );
-      console.log(
-        "Test Log -> file: SearchYoutube.js -> line 19 -> getSearchResult -> response",
-        data
-      );
       setListVideos(
         data.map(({ id, snippet }) => ({
           title: snippet.title,
           link: `https://www.youtube.com/watch?v=${id.videoId}`,
           thumbnails: snippet.thumbnails.high.url,
+          time: new Date(snippet.publishedAt),
+          channel: snippet.channelTitle,
+          description: snippet.description,
         }))
       );
     } catch (error) {
@@ -74,20 +75,42 @@ export default function SearchYoutube() {
       </Box>
       <Box component="span" sx={{ display: "block" }}>
         {listVideos.map((video, index) => (
-          <Card sx={{ maxWidth: 345, display: "inline" }} key={index}>
-            <CardActionArea>
+          <Card sx={{ display: "flex", mb: 1 }} key={index}>
+            <CardActionArea
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                p: "10px",
+              }}
+            >
               <CardMedia
                 component="img"
-                sx={{ maxWidth: 200 }}
+                sx={{ maxWidth: 150 }}
                 image={video.thumbnails}
-                alt="green iguana"
+                alt={video.title}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="subtitle1" component="div">
                   {video.title}
                 </Typography>
+                <Box sx={{ display: "flex", flexDirection: "row" }}>
+                  <Typography variant="body2" color="text.primary">
+                    {video.channel}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.primary"
+                    sx={{ mr: 1, ml: 1 }}
+                  >
+                    •
+                  </Typography>
+                  <Typography variant="body2" color="text.primary">
+                    {`${video.time.toLocaleString()} ${video.time.toLocaleTimeString()}`}
+                  </Typography>
+                </Box>
                 <Typography variant="body2" color="text.secondary">
-                  123
+                  {video.description}
                 </Typography>
               </CardContent>
             </CardActionArea>
